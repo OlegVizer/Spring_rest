@@ -5,7 +5,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.List;
+
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -21,18 +22,21 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
+    @Transient
+    private String passwordConfirm;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "userId"),
             inverseJoinColumns = @JoinColumn(name = "roleId"))
 
-    private List<Role> roles;
+    private Set<Role> roles;
 
     public User() {
 
     }
 
-    public User(int id, String name, String hobby) {
+    public User(int id, String username, String hobby) {
         this.id = id;
         this.username = username;
         this.hobby = hobby;
@@ -44,14 +48,6 @@ public class User implements UserDetails {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return username;
-    }
-
-    public void setName(String name) {
-        this.username = username;
     }
 
     public String getHobby() {
@@ -66,38 +62,29 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (obj == this) {
-            return true;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        User user = (User) obj;
-        return (this.getId() == user.getId());
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    @Override
-    public int hashCode() {
-        return 1 + 29 * getId();
+    public String getPasswordConfirm() {
+        return passwordConfirm;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + username + '\'' +
-                ", hobby='" + hobby + '\'' +
-                '}';
+    public void setPasswordConfirm(String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return getRoles();
     }
 
     @Override
@@ -129,4 +116,34 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        User user = (User) obj;
+        return (this.getId() == user.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return 1 + 29 * getId();
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + username + '\'' +
+                ", hobby='" + hobby + '\'' +
+                '}';
+    }
+
 }

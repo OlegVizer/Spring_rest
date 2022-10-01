@@ -10,13 +10,28 @@
 
   <input type="text" hidden name="id" th:field="${user.id}"/>
 
-  Name <input type="text" name="name" th:field="${user.name}"/>
+  Name <input type="text" name="username" th:field="${user.username}"/>
   <br>
   Hobby <input type="text" name="hobby" th:field="${user.hobby}"/>
   <br>
+  Password <input type="text" name="password" th:field="${user.password}"/>
+  <br>
+  <label>Role:
+    <select multiple size="2" name="select_role" class="form-control" id="exampleFormControlSelect3">
+      <option th:each="role : ${role}" th:value="${role.getAuthority()}"
+              th:text="${role.getAuthority() == 'ROLE_ADMIN'} ? 'ROLE_ADMIN' : 'ROLE_USER'"></option>
+    </select>
+    <br/>
+
+  </label>
+
   <input type="submit" value="Ok">
 
+</form>
 
+<br>
+<form th:method="GET" th:action="@{/logout}">
+  <input type="submit" value="Logout">
 </form>
 
 </body>

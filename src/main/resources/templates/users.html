@@ -11,26 +11,38 @@
     <thead>
     <tr>
         <th>ID</th>
-        <th>Name</th>
+        <th>Username</th>
         <th>Hobby</th>
+        <th>Password</th>
+        <th>Role</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="user : ${users}">
         <td th:utext="${user.id}"></td>
-        <td th:utext="${user.name}"></td>
+        <td th:utext="${user.username}"></td>
         <td th:utext="${user.hobby}"></td>
-        <td><button><a th:href="@{users/edit/{id}(id=${user.getId()})}">Edit</a></button></td>
-        <td><form th:method="DELETE" th:action="@{deleteUser/{id}(id=${user.getId()})}" th:object="${user}">
+        <td th:utext="${user.password}"></td>
+        <td th:utext="${user.roles}"></td>
+        <td><button><a th:href="@{admin/edit/{id}(id=${user.getId()})}">Edit</a></button></td>
+        <td><form th:method="DELETE" th:action="@{admin/deleteUser/{id}(id=${user.getId()})}" th:object="${user}">
             <button type="submit">Delete</button>
-        </form></td><!
+        </form></td>
     </tr>
     </tbody>
 </table>
 
 <br>
 
-<button><a href="/new">Add</a></button>
+<button><a href="/admin/new">Add</a></button>
+
+<br>
+
+<br>
+
+<form th:method="GET" th:action="@{/logout}">
+    <input type="submit" value="Logout">
+</form>
 
 </body>
 </html>

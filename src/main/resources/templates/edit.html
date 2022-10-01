@@ -6,7 +6,7 @@
   <title>Edit user</title>
 </head>
 <body>
-<form th:method="PATCH" th:action="@{/users/edit/{id}(id=${user.getId()})}" th:object="${user}">
+<form th:method="PATCH" th:action="@{/admin/edit/{id}(id=${user.getId()})}" th:object="${user}">
   <table>
     <tr>
       <td></td>
@@ -14,11 +14,15 @@
     </tr>
     <tr>
       <td>Name</td>
-      <td><input type="text" name="name" th:field="${user.name}"/></td>
+      <td><input type="text" name="username" th:field="${user.username}"/></td>
     </tr>
     <tr>
       <td>Hobby</td>
       <td><input type="text" name="hobby" th:field="${user.hobby}"/></td>
+    </tr>
+    <tr>
+      <td>Password</td>
+      <td><input type="text" name="password" th:field="${user.password}"/></td>
     </tr>
     <tr>
       <td>
@@ -27,5 +31,11 @@
     </tr>
   </table>
 </form>
+
+<br>
+<form th:method="GET" th:action="@{/logout}">
+  <input type="submit" value="Logout">
+</form>
+
 </body>
 </html>
