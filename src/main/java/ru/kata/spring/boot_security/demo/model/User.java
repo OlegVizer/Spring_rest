@@ -5,7 +5,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
-
 import java.util.Set;
 
 @Entity
@@ -21,9 +20,6 @@ public class User implements UserDetails {
     private String hobby;
     @Column(name = "password")
     private String password;
-
-    @Transient
-    private String passwordConfirm;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_role",
@@ -64,14 +60,6 @@ public class User implements UserDetails {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPasswordConfirm() {
-        return passwordConfirm;
-    }
-
-    public void setPasswordConfirm(String passwordConfirm) {
-        this.passwordConfirm = passwordConfirm;
     }
 
     public Set<Role> getRoles() {

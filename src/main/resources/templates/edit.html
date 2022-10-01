@@ -26,6 +26,16 @@
     </tr>
     <tr>
       <td>
+        <label>Role:
+          <select multiple size="2" name="select_role" class="form-control" id="exampleFormControlSelect3">
+            <option th:each="role : ${role}" th:value="${role.getAuthority()}"
+                    th:text="${role.getAuthority() == 'ROLE_ADMIN'} ? 'ROLE_ADMIN' : 'ROLE_USER'"></option>
+          </select>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <input type="submit" value="Ok"/>
       </td>
     </tr>
