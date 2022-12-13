@@ -9,7 +9,6 @@ import preproject.kata314.repository.UserRepository;
 import java.util.List;
 
 @Service
-@Transactional(readOnly = true)
 public class UserServiceImpl implements UserService {
 
   private final UserRepository userDAO;

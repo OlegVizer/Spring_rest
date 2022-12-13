@@ -12,11 +12,6 @@ import preproject.kata314.model.User;
 
 public class UserRestController {
 
-  @GetMapping("/user")
-  public ModelAndView getUserPage() {
-    return new ModelAndView("userPage");
-  }
-
   @GetMapping("/api/user")
   public ResponseEntity<User> getUser(Authentication auth) {
     return new ResponseEntity<>((User) auth.getPrincipal(), HttpStatus.OK);

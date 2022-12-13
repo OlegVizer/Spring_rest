@@ -8,7 +8,6 @@ import preproject.kata314.repository.RoleRepository;
 import java.util.List;
 
 @Service
-@Transactional(readOnly = true)
 public class RoleServiceImpl implements RoleService{
 
   private final RoleRepository roleDAO;

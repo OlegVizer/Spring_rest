@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import preproject.kata314.repository.UserRepository;
 
 @Service
-@Transactional(readOnly = true)
 public class UserDetailsServiceImpl implements UserDetailsService {
 
   private final UserRepository userDAO;
